@@ -55,7 +55,12 @@ The editor is built to handle heavy-duty professional codecs. Supported formats 
 - **Backend**: FFmpeg (Bundled)
 - **Language**: Python 3.11
 
-
+- ⚠️ Notice for Windows / Intel Mac Users
+Currently, pre-built binaries are only provided for Apple Silicon (ARM64) Macs. If you are using Windows or an Intel Mac, you can easily build the app from the source code using AI Agents (like Codex, Manus, Antigravity, or ChatGPT).
+How to build via AI Agent:
+Download the source code (Zip) or clone this repository.
+Open your AI Agent and copy-paste the following prompt:
+"I want to build this open-source project on my [Your OS: e.g., Windows 11 / Intel Mac]. Here is the source code directory. Please check the package.json (or CMakeLists.txt, requirements.txt etc...) and guide me step-by-step through the installation and build process."
 ---
 
 <div align="center">
