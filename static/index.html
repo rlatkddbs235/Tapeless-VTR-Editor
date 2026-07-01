@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tapeless VTR Editor</title>
+  <!-- Outfit Font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Styling -->
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <img src="/static/insertcut_icon_1024.png" alt="Tapeless VTR Editor icon">
+      </div>
+      <div class="logo-text">
+        <h1>Tapeless VTR Editor <span style="font-size: 0.5em; vertical-align: middle; opacity: 0.6; margin-left: 8px;">v1.0.0</span></h1>
+        <p>Lossless Video Frame Replacement Tool</p>
+      </div>
+    </div>
+    <div class="header-status" id="global-status">
+      <span class="status-dot green"></span>
+      <span class="status-text">Server Connected</span>
+    </div>
+  </header>
+
+  <!-- Main Grid Area -->
+  <main class="app-container">
+    
+    <!-- Players Section -->
+    <section class="players-section">
+      
+      <!-- Source Video Player (Left) -->
+      <div class="player-panel" id="source-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <i data-lucide="video"></i>
+            <h2>SOURCE SCREEN (Insert Clip)</h2>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btn-load-source">
+            <i data-lucide="folder-open"></i> Load Source
+          </button>
+        </div>
+        
+        <div class="video-wrapper">
+          <video id="source-video" preload="auto" playsinline></video>
+          <div class="no-video-placeholder" id="source-placeholder">
+            <i data-lucide="film"></i>
+            <p>Load Source Video File</p>
+            <span class="sub-text">ProRes / DNxHD / XDCAM / Cineform / DCP</span>
+          </div>
+          <div class="loader-overlay" id="source-loader">
+            <div class="spinner"></div>
+            <p>Generating Proxy for Preview...</p>
+          </div>
+        </div>
+
+        <div class="player-metadata" id="source-meta">
+          <span>Path: <strong class="meta-val">-</strong></span>
+          <span>Codec: <strong class="meta-val">-</strong></span>
+          <span>FPS: <strong class="meta-val">-</strong></span>
+        </div>
+
+        <div class="timecode-display" id="source-timecode">00:00:00:00</div>
+
+        <div class="player-controls">
+          <div class="mark-buttons">
+            <button class="btn btn-primary btn-mark" id="btn-source-mark-in" title="Mark In ([)">
+              <span>[</span> Mark In
+            </button>
+            <button class="btn btn-primary btn-mark" id="btn-source-mark-out" title="Mark Out (])">
+              Mark Out <span>]</span>
+            </button>
+          </div>
+          <div class="transport-buttons">
+            <button class="btn btn-icon btn-text" id="btn-source-prev-1s" title="-1s">1s</button>
+            <button class="btn btn-icon btn-text" id="btn-source-prev-1f" title="-1 Frame">1f</button>
+            <button class="btn btn-icon btn-play" id="btn-source-play" title="Play/Pause"><i data-lucide="play"></i></button>
+            <button class="btn btn-icon btn-text" id="btn-source-next-1f" title="+1 Frame">1f</button>
+            <button class="btn btn-icon btn-text" id="btn-source-next-1s" title="+1s">1s</button>
+          </div>
+          <div class="points-indicator">
+            <span>In: <strong id="source-in-val" class="share-tech">00:00:00:00</strong></span>
+            <span>Out: <strong id="source-out-val" class="share-tech">00:00:00:00</strong></span>
+            <span>Dur: <strong id="source-dur-val" class="share-tech">0s (0f)</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Target Video Player (Right) -->
+      <div class="player-panel" id="target-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <i data-lucide="monitor"></i>
+            <h2>PREVIEW SCREEN (Target Timeline)</h2>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btn-load-target">
+            <i data-lucide="folder-open"></i> Load Target
+          </button>
+        </div>
+        
+        <div class="video-wrapper">
+          <video id="target-video" preload="auto" playsinline></video>
+          <video id="target-video-overlay" preload="auto" playsinline muted style="display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:contain; z-index:5; pointer-events:none;"></video>
+          <div class="no-video-placeholder" id="target-placeholder">
+            <i data-lucide="film"></i>
+            <p>Load Target Video File</p>
+            <span class="sub-text">ProRes / DNxHD / XDCAM / Cineform / DCP</span>
+          </div>
+          <div class="loader-overlay" id="target-loader">
+            <div class="spinner"></div>
+            <p>Generating Proxy for Preview...</p>
+          </div>
+        </div>
+
+        <div class="player-metadata" id="target-meta">
+          <span>Path: <strong class="meta-val">-</strong></span>
+          <span>Codec: <strong class="meta-val">-</strong></span>
+          <span>FPS: <strong class="meta-val">-</strong></span>
+        </div>
+
+        <div class="timecode-display" id="target-timecode">00:00:00:00</div>
+
+        <div class="player-controls">
+          <div class="mark-buttons">
+            <button class="btn btn-accent btn-mark" id="btn-target-mark-in" title="Mark In ({)">
+              <span>[</span> Mark In
+            </button>
+            <button class="btn btn-accent btn-mark" id="btn-target-mark-out" title="Mark Out (})">
+              Mark Out <span>]</span>
+            </button>
+          </div>
+          <div class="transport-buttons">
+            <button class="btn btn-icon btn-text" id="btn-target-prev-1s" title="-1s">1s</button>
+            <button class="btn btn-icon btn-text" id="btn-target-prev-1f" title="-1 Frame">1f</button>
+            <button class="btn btn-icon btn-play" id="btn-target-play" title="Play/Pause"><i data-lucide="play"></i></button>
+            <button class="btn btn-icon btn-text" id="btn-target-next-1f" title="+1 Frame">1f</button>
+            <button class="btn btn-icon btn-text" id="btn-target-next-1s" title="+1s">1s</button>
+          </div>
+          <div class="points-indicator">
+            <span>In: <strong id="target-in-val" class="share-tech">00:00:00:00</strong></span>
+            <span>Out: <strong id="target-out-val" class="share-tech">00:00:00:00</strong></span>
+            <span>Dur: <strong id="target-dur-val" class="share-tech">0s (0f)</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Tracks Section (OpenShot Style) -->
+    <section class="timeline-section">
+      <div class="timeline-header">
+        <div class="timeline-title"><i data-lucide="sliders"></i> Timeline Tracks</div>
+        <div class="timeline-controls">
+          <div class="timeline-nav-controls">
+            <div class="tc-input-group">
+              <input type="text" id="jump-tc" class="tc-input share-tech" placeholder="00:00:00:00" maxlength="11">
+              <button class="btn btn-accent btn-sm" id="btn-jump-go">Go</button>
+            </div>
+            <label class="df-toggle-label" title="Drop Frame timecode (SMPTE 29.97 / 59.94 DF)">
+              <input type="checkbox" id="chk-drop-frame">
+              <span class="df-toggle-track"></span>
+              <span class="df-toggle-text">Drop Frame</span>
+            </label>
+          </div>
+          <div class="timeline-zoom-controls">
+            <button class="btn btn-icon btn-sm" id="btn-zoom-out" title="Zoom Out"><i data-lucide="minus"></i></button>
+            <input type="range" id="timeline-zoom" min="1" max="50" value="1" step="0.1" style="width: 100px;">
+            <button class="btn btn-icon btn-sm" id="btn-zoom-in" title="Zoom In"><i data-lucide="plus"></i></button>
+          </div>
+          <div class="timeline-time-info share-tech" id="timeline-time-info">00:00:00:00 / 00:00:00:00</div>
+        </div>
+      </div>
+      
+      <div class="timeline-view-wrapper">
+        <!-- Ruler -->
+        <div class="timeline-ruler" id="timeline-ruler">
+          <!-- Dynamically populated ticks -->
+        </div>
+
+        <div class="tracks-container" id="tracks-container">
+          <!-- Playhead line -->
+          <div class="playhead" id="playhead">
+            <div class="playhead-handle"></div>
+          </div>
+          
+          <!-- Track 2 (Insert Track) -->
+          <div class="track-row" id="track-2">
+            <div class="track-label">Track 2: Insert</div>
+            <div class="track-timeline">
+              <!-- Dynamically rendered visual source overlay range -->
+              <div class="overlay-clip" id="overlay-clip">
+                <span class="clip-label">Insert Source Clip</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Track 1 (Target Track) -->
+          <div class="track-row" id="track-1">
+            <div class="track-label">Track 1: Base</div>
+            <div class="track-timeline">
+              <div class="base-clip" id="base-clip">
+                <span class="clip-label">Base Target File</span>
+                <!-- Visual target cut range highlight -->
+                <div class="cut-range-highlight" id="cut-range-highlight"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Settings & Operations Section -->
+    <section class="control-section">
+      <div class="settings-card card-panel">
+        <h3><i data-lucide="settings"></i> Configuration</h3>
+        
+        <div class="form-group">
+          <label>Edit Mode</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="edit-mode" value="both">
+              <span class="radio-custom"></span>
+              Video + Audio
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="edit-mode" value="video_only" checked>
+              <span class="radio-custom"></span>
+              Video Only
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="edit-mode" value="audio_only">
+              <span class="radio-custom"></span>
+              Audio Only
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="output-path">Output File Path</label>
+          <div class="input-with-action">
+            <input type="text" id="output-path" placeholder="Default: [Target]_inserted_[hash].mov">
+            <button class="btn btn-secondary btn-sm" id="btn-select-output" title="Choose Output Folder">
+              <i data-lucide="folder"></i>
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btn-output-default" title="Reset to default">
+              <i data-lucide="rotate-ccw"></i>
+            </button>
+          </div>
+          <span class="help-text">Leave empty to auto-generate a new file, or set to the original path to overwrite.</span>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn btn-success btn-large btn-block" id="btn-insert-edit">
+            <i data-lucide="scissors"></i> Perform Insert Edit
+          </button>
+        </div>
+      </div>
+
+      <div class="console-card card-panel">
+        <h3><i data-lucide="terminal"></i> FFmpeg Execution Logs</h3>
+        <div class="console-log" id="console-log">
+          <div class="log-line system">[System] Ready. Please load Target and Source video files to begin.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal file loading inputs (hidden, triggered by buttons) -->
+  <input type="file" id="input-file-source" accept="video/*,.mov,.mxf" style="display:none">
+  <input type="file" id="input-file-target" accept="video/*,.mov,.mxf" style="display:none">
+
+  <!-- File prompt path modals (since browsers block direct full path upload, we ask for full absolute path) -->
+  <div class="modal" id="path-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Load Video File</h3>
+        <button class="btn-close" id="modal-btn-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Because web browsers restrict access to full local paths, please enter the **absolute file path** of your video below:</p>
+        <div class="form-group">
+          <input type="text" id="modal-input-path" placeholder="e.g. /Users/gimsang-yun/Videos/master.mov" class="modal-text-input">
+        </div>
+        <p class="modal-notice">FFmpeg and the backend require direct disk access to perform lossless cutting and proxy rendering.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="modal-btn-cancel">Cancel</button>
+        <button class="btn btn-accent" id="modal-btn-submit">Load Video</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script logic -->
+  <script src="/static/app.js"></script>
+</body>
+</html>
