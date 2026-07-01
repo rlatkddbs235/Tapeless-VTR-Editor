@@ -1,0 +1,62 @@
+<div align="center">
+	<br>
+  <p><img src="static/insertcut_icon_1024.png" width="120" alt="Tapeless VTR Editor" /></p>
+  <p><b style="font-size: 24px;">Tapeless VTR Editor</b></p>
+  Fast insert editing tool for broadcast-grade video — replace frames losslessly without re-encoding.
+	<br>
+  <img src="https://img.shields.io/badge/Platform-macOS-lightgrey" />
+  <img src="https://img.shields.io/badge/Python-3.11-blue" />
+  <img src="https://img.shields.io/badge/Engine-FFmpeg-green" />
+	<br>
+	<br>
+  <p align="center"><img width="4336" height="2794" alt="screenshot" src="https://github.com/user-attachments/assets/848690ad-0104-42c8-b2a3-96d405582d04" />  </p>
+	<br>
+	<br>
+</div>
+
+**Tapeless VTR Editor** is a specialized utility designed for professionals who need to perform precise "insert edits" on high-quality video files. Unlike traditional NLEs that require rendering or re-encoding the entire timeline, this tool allows you to replace specific frames or segments **losslessly**, maintaining the exact original quality and bitstream of the source.
+
+It is ideal for broadcast environments where maintaining the integrity of the original codec (such as ProRes or DNxHD) is critical.
+
+## 🛠 Features
+
+- **True Lossless Insert Editing**: Replace frames or segments without re-encoding. No quality loss, no generation loss.
+- **Frame-Accurate Precision**: Precisely target the frames that need replacement to ensure a seamless cut.
+- **Broadcast-Grade Codec Support**: Optimized for professional formats used in television and cinema.
+- **High-Speed Processing**: Powered by FFmpeg, performing direct data manipulation for near-instant results.
+- **Intuitive GUI**: Simple, focused interface for selecting files, defining ranges, and executing replacements.
+- **macOS Native**: Distributed as a standalone `.dmg` for easy installation on Mac.
+
+## 📺 Supported Formats
+
+The editor is built to handle heavy-duty professional codecs. Supported formats include, but are not limited to:
+
+- **Apple ProRes** (422, 4444, etc.)
+- **Avid DNxHD / DNxHR**
+- **Sony XDCAM, XAVC(Intra Only)**
+- **Other FFmpeg-compatible All-Intra formats**
+
+## 🚀 Getting Started
+
+### Installation
+1. Download the latest `Tapeless-VTR-Editor-v1.0.0.dmg` from the [Releases](#) section.
+2. Open the `.dmg` file and drag **Tapeless VTR Editor** to your `Applications` folder.
+3. Launch the app and start editing.
+
+### Basic Workflow
+1. **Load Source**: Select the master video file you wish to edit.
+2. **Define Range**: Identify the specific frames or timecode range that needs to be replaced.
+3. **Insert New Content**: Select the replacement clip (must match the source codec/parameters for lossless operation).
+4. **Execute**: Run the insert process to generate the final output file.
+
+## ⚙️ Technical Requirements
+
+- **OS**: macOS (Apple Silicon)
+- **Backend**: FFmpeg (Bundled)
+- **Language**: Python 3.11
+
+
+---
+
+<div align="center">
+Made for broadcast professionals who value precision and quality. 🎬
