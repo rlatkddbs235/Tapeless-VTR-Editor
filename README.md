@@ -18,6 +18,9 @@
 
 It is ideal for broadcast environments where maintaining the integrity of the original codec (such as ProRes or DNxHD) is critical.
 
+## ⚠️ Warning: Built with 100% Vibe Coding
+This project was fully built using Vibe Coding with AI.
+
 ## 🛠 Features
 
 - **True Lossless Insert Editing**: Replace frames or segments without re-encoding. No quality loss, no generation loss.
