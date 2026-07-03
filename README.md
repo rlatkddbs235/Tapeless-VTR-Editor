@@ -45,6 +45,18 @@ The editor is built to handle heavy-duty professional codecs. Supported formats 
 1. Download the latest `Tapeless-VTR-Editor-v1.0.0.dmg` from the [Releases](#) section.
 2. Open the `.dmg` file and drag **Tapeless VTR Editor** to your `Applications` folder.
 3. Launch the app and start editing.
+4. ### ⚠️ macOS Gatekeeper (Security Notice)
+Since this app is not signed by a certified Apple Developer, macOS may block it from opening with a warning: *"App cannot be opened because it is from an unidentified developer."*
+
+To bypass this and run the app, please use one of the following methods:
+
+**Method : System Settings**
+1. Try to open the app normally (it will show the warning). Click **OK**.
+2. Go to **System Settings** $\rightarrow$ **Privacy & Security**.
+3. Scroll down to the **Security** section.
+4. You will see a message saying *"Tapeless VTR Editor was blocked..."*. Click the **Open Anyway** button.
+5. Enter your Mac password and click **Open**.
+
 
 ### Basic Workflow
 1. **Load Source**: Select the master video file you wish to edit.
