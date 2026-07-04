@@ -18,7 +18,7 @@
 
 It is ideal for broadcast environments where maintaining the integrity of the original codec (such as ProRes or DNxHD) is critical.
 
-[https://github.com/rlatkddbs235/Tapeless-VTR-Editor/releases/tag/1.0.0](#)
+[https://github.com/rlatkddbs235/Tapeless-VTR-Editor/releases/tag/1.0.0](https://github.com/rlatkddbs235/Tapeless-VTR-Editor/releases/tag/1.0.0)
 
 ## ⚠️ Warning: Built with 100% Vibe Coding
 This project was fully built using Vibe Coding with AI.
@@ -44,7 +44,7 @@ The editor is built to handle heavy-duty professional codecs. Supported formats 
 ## 🚀 Getting Started
 
 ### Installation
-1. Download the latest `Tapeless-VTR-Editor-v1.0.0.dmg` from the [Releases](#) section.
+1. Download the latest `Tapeless-VTR-Editor-v1.0.0.dmg` from the [Releases](https://github.com/rlatkddbs235/Tapeless-VTR-Editor/releases/tag/1.0.0) section.
 2. Open the `.dmg` file and drag **Tapeless VTR Editor** to your `Applications` folder.
 3. Launch the app and start editing.
 4. ### ⚠️ macOS Gatekeeper (Security Notice)
