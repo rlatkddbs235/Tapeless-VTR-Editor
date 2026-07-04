@@ -18,6 +18,8 @@
 
 It is ideal for broadcast environments where maintaining the integrity of the original codec (such as ProRes or DNxHD) is critical.
 
+[https://github.com/rlatkddbs235/Tapeless-VTR-Editor/releases/tag/1.0.0](#)
+
 ## ⚠️ Warning: Built with 100% Vibe Coding
 This project was fully built using Vibe Coding with AI.
 
