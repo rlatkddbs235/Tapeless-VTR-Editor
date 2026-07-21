@@ -1,8 +1,8 @@
 <div align="center">
 	<br>
   <p><img src="static/insertcut_icon_1024.png" width="120" alt="Tapeless VTR Editor" /></p>
-  <p><b style="font-size: 24px;">Tapeless VTR Editor</b></p>
-  Fast insert editing tool for broadcast-grade video — replace frames losslessly without re-encoding.
+  <h1>Tapeless VTR Editor - Lossless Video Editing Tool for Broadcast</h1>
+  <p>Fast insert editing software for broadcast-grade video — replace frames losslessly without re-encoding using Python and FFmpeg.</p>
 	<br>
   <img src="https://img.shields.io/badge/Platform-macOS-lightgrey" />
   <img src="https://img.shields.io/badge/Python-3.11-blue" />
@@ -14,7 +14,7 @@
 	<br>
 </div>
 
-**Tapeless VTR Editor** is a specialized utility designed for professionals who need to perform precise "insert edits" on high-quality video files. Unlike traditional NLEs that require rendering or re-encoding the entire timeline, this tool allows you to replace specific frames or segments **losslessly**, maintaining the exact original quality and bitstream of the source.
+**Tapeless VTR Editor** is a specialized video editing utility designed for professionals who need to perform precise "insert edits" on high-quality video files. Unlike traditional NLEs (Non-Linear Editors) that require rendering or re-encoding the entire timeline, this open-source Python tool allows you to replace specific frames or segments **losslessly**, maintaining the exact original quality and bitstream of the source video.
 
 It is ideal for broadcast environments where maintaining the integrity of the original codec (such as ProRes or DNxHD) is critical.
 
